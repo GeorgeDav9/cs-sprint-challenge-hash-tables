@@ -4,20 +4,25 @@ def intersection(arrays):
     """
     # Your code here
 
-    # setup hash table
-    integer_list = {}
+    # Instantiate a cache dict 'occurences'
+    occurrences = dict()
 
-    # setup  list
+    for i in range(len(arrays)):
+        for num in arrays[i]:
+            if num not in occurrences:
+                occurrences[num] = 1
+
+            else:
+                occurrences[num] +=1
+
+    # Instantiate result
     result = []
 
-    # single list within hash table
-    for single_list in arrays:
-        for integer in single_list:
-            if integer != integer_list:
-                integer_list[integer] = 1
-            else:
-                # add integer to the intersection
-                result.append(integer)
+    # If number has occurred in every list in the arrays then
+    # we add it to result
+    l = len(arrays)
+    result = result + [k for k,v in occurrences.items() if v == l]
+
 
     return result
 
